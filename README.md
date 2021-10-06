@@ -7,6 +7,7 @@ It is pretty simple. You just Download it in your computer, run the file "Financ
 
 Considering you do not have MySQL, then you will need to download it and run the following queries:
 
+```Mysql
 CREATE DATABASE financeapp;
 CREATE TABLE table_name (
     id INT NOT_NULL AUTO_INCREMENT,
@@ -15,6 +16,7 @@ CREATE TABLE table_name (
     description VARCHAR(200),
     timestamp DATETIME
 );
+```
 
 Moreover, you will probably have to change the user or the password of your database in "application.properties" file.
 

@@ -16,13 +16,18 @@ public class CashFlow implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @Column(name = "user_id")
+    private Long userId;
+
     @Column(name = "name")
     private String name;
 
     @Column(name = "price")
     private Double price;
 
-    //TODO: Type (Enum)
+    @Column(name = "type")
+    private String type;
 
     @Column(name = "description")
     private String description;
@@ -32,15 +37,17 @@ public class CashFlow implements Serializable {
     private Date timestamp;
 
     public CashFlow(){
-
     }
 
-    public CashFlow(Long id, String name, Double price, String description, Date timeStamp) {
+    public CashFlow(Long id, Long userId, String name, Double price,
+                    String type, String description, Date timestamp) {
         this.id = id;
+        this.userId = userId;
         this.name = name;
         this.price = price;
+        this.type = type;
         this.description = description;
-        this.timestamp = timeStamp;
+        this.timestamp = timestamp;
     }
 
     public String getName() {
@@ -81,6 +88,22 @@ public class CashFlow implements Serializable {
 
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.coder.financeApp.controller;
 
+import com.coder.financeApp.dto.CashFlowRequestDto;
 import com.coder.financeApp.exception.ResourceNotFoundException;
 import com.coder.financeApp.model.CashFlow;
 import com.coder.financeApp.service.CashFlowService;
@@ -31,8 +32,8 @@ public class CashFlowController {
     }
 
     @PostMapping(path = "/add")
-    public ResponseEntity<CashFlow> createCashFlow(@Valid @RequestBody CashFlow CashFlow) {
-        CashFlow cf = service.insert(CashFlow);
+    public ResponseEntity<CashFlow> createCashFlow(@Valid @RequestBody CashFlowRequestDto cashFlowRequestDto) {
+        CashFlow cf = service.insert(cashFlowRequestDto);
         return ResponseEntity.ok().body(cf);
     }
 }

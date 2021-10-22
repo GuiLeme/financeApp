@@ -2,6 +2,7 @@ package com.coder.financeApp.model;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,35 +15,36 @@ public class CashFlow implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "_id")
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
-    @Column(name = "user_id")
-    private Long userId;
+    @JoinColumn(name = "_user_id")
+    private User user;
 
-    @Column(name = "name")
+    @Column(name = "_name")
     private String name;
 
-    @Column(name = "price")
+    @Column(name = "_price")
     private Double price;
 
-    @Column(name = "type")
+    @Column(name = "_type")
     private String type;
 
-    @Column(name = "description")
+    @Column(name = "_description")
     private String description;
 
-    @Column(name = "timestamp")
+    @Column(name = "_timestamp")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd' 'HH:mm:ss", timezone = "GMT")
     private Date timestamp;
 
     public CashFlow(){
     }
 
-    public CashFlow(Long id, Long userId, String name, Double price,
+    public CashFlow(Long id, String name, Double price,
                     String type, String description, Date timestamp) {
         this.id = id;
-        this.userId = userId;
         this.name = name;
         this.price = price;
         this.type = type;
@@ -98,12 +100,12 @@ public class CashFlow implements Serializable {
         this.type = type;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

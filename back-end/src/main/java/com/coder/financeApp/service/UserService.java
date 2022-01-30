@@ -14,9 +14,9 @@ public class UserService {
     @Autowired
     UserRepository repository;
 
-    public User findById(Long fluxId) throws ResourceNotFoundException {
-        return repository.findById(fluxId)
-                .orElseThrow(() -> new ResourceNotFoundException("Flux not found: " + fluxId));
+    public User findById(Long userId) throws ResourceNotFoundException {
+        return repository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("Flux not found: " + userId));
     }
 
     public User insert(User user){

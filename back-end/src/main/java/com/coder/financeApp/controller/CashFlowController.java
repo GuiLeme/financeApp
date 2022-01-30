@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/cash-flows")
-//@CrossOrigin(origins = "http://localhost:4288")
+@CrossOrigin
 public class CashFlowController {
 
     @Autowired
@@ -32,7 +32,7 @@ public class CashFlowController {
     }
 
     @PostMapping(path = "/add")
-    public ResponseEntity<CashFlow> createCashFlow(@Valid @RequestBody CashFlowRequestDto cashFlowRequestDto) {
+    public ResponseEntity<CashFlow> createCashFlow(@Valid @RequestBody CashFlowRequestDto cashFlowRequestDto) throws ResourceNotFoundException {
         CashFlow cf = service.insert(cashFlowRequestDto);
         return ResponseEntity.ok().body(cf);
     }

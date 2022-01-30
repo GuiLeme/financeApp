@@ -9,12 +9,17 @@ import com.coder.financeApp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class CashFlowService {
     @Autowired
     CashFlowRepository cashFlowRepository;
+
+    @Autowired
+    UserService userService;
 
     @Autowired
     UserRepository userRepository;
@@ -24,12 +29,16 @@ public class CashFlowService {
                 .orElseThrow(() -> new ResourceNotFoundException("Flux not found: " + fluxId));
     }
 
-    public CashFlow insert(CashFlowRequestDto cashFlowRequestDto){
+    public CashFlow insert(CashFlowRequestDto cashFlowRequestDto) throws ResourceNotFoundException {
 
         CashFlow cashFlow = cashFlowRequestDto.getCashFlow().convertToCashFlow();
-        User user = userRepository.getById(cashFlowRequestDto.getId_user());
+        User user = userService.findById(cashFlowRequestDto.getId_user());
 
         cashFlow.setUser(user);
+
+        if (cashFlow.getTimestamp() == null){
+            cashFlow.setTimestamp(Date.from(Instant.now()));
+        }
 
         return cashFlowRepository.save(cashFlow);
     }

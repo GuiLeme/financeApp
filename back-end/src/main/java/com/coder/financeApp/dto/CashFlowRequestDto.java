@@ -1,6 +1,5 @@
 package com.coder.financeApp.dto;
 
-import com.coder.financeApp.model.CashFlow;
 
 import java.io.Serializable;
 
